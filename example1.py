@@ -11,8 +11,9 @@ if __name__ == "__main__":
     files = agent._dirTraversel(".")
     # Create the zip.
     create_zip_bool = agent._createZip(files)
+    agent._protectZip("Test2.zip")
     # Send the zip file.. Dosent actually work. Just a HTTPBin
-    #send_package = agent._sendPackage(url)
+    send_package = agent._sendPackage(url)
 
 
 
